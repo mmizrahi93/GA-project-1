@@ -1,3 +1,6 @@
+body {
+    background-color: skyblue;
+}
 h1{
     text-align: center;
 }
@@ -9,16 +12,11 @@ table {
     background-color: yellow;
 }
 
-tr {
-    border: 2px solid black;
-}
-
 td {
     border: 2px solid black;
-    height: 40px;
-    width: 40px;
-    padding-left: 2%;
-    padding-right: 2%;
+    border-radius: 30px;
+    height: 45px;
+    width: 45px;
     background-color: beige;
 }
 
