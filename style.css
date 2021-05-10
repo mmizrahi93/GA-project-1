@@ -23,3 +23,12 @@ td {
 td:hover {
     background-color: blue;
 }
+
+.red {
+    background-color: red;
+
+}
+
+.black {
+    background-color: black;
+}

@@ -8,19 +8,26 @@ const blackPlayer = [];
 
 // click method was also code i wrote in the tic tac toe hw
 const click = (ev) => {
-    if ((ev.currentTarget.style.backgroundColor === "red") || (ev.currentTarget.style.backgroundColor === "black")) {
-        return;
+    if (ev.currentTarget.classList.contains("start")) {
+        if ((ev.currentTarget.style.backgroundColor === "red") || (ev.currentTarget.style.backgroundColor === "black")) {
+            return;
+        } else if(redPlayer.length === blackPlayer.length) {
+            // ev.currentTarget.querySelector(`#${7}`).classList.add(".row1")
+            // ev.currentTarget.style.backgroundColor = "red"
+            redPlayer.push(ev)
+            ev.currentTarget.classList.add("red")
+            console.log(ev.currentTarget)
+           
+        } else if(redPlayer.length > blackPlayer.length) {
+            // ev.currentTarget.querySelector(`#${+ 7}`).classList.add(".row1")
+            // ev.currentTarget.style.backgroundColor = "black"
+            blackPlayer.push(ev)
+            ev.currentTarget.classList.add("black")
+            console.log(ev.currentTarget)
+        }
 
-    } else if((ev.currentTarget.querySelector('.column1')) && (ev.currentTarget.querySelector(`.row1`).style.backgroundColor === "beige")) {
-        return;
-
-    }else if(redPlayer.length === blackPlayer.length) {
-        ev.currentTarget.style.backgroundColor = "red"
-        redPlayer.push(ev)
-       
-    } else if(redPlayer.length > blackPlayer.length) {
-        ev.currentTarget.style.backgroundColor = "black"
-        blackPlayer.push(ev)
+    } else {
+        alert("Cant go there!")
     }
 }
 
@@ -31,3 +38,12 @@ clickSpot.forEach((element) => element.addEventListener('click',click))
 // && (ev.currentTarget.querySelector('.upper-row'))
 // (ev.currentTarget.querySelectorAll('.upper-row'))
 // && (ev.currentTarget.querySelector(`#(id ${> 0})`))
+// else if(redPlayer.length === blackPlayer.length) {
+//     // ev.currentTarget.classList.add(".row1")
+//     ev.currentTarget.style.backgroundColor = "red"
+//     redPlayer.push(ev)
+   
+// } else if(redPlayer.length > blackPlayer.length) {
+//     // ev.currentTarget.classList.add(".row1")
+//     ev.currentTarget.style.backgroundColor = "black"
+//     blackPlayer.push(ev)
