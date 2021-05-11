@@ -1,35 +1,73 @@
 const container = document.querySelector('.container')
 const table = document.querySelector('table')
 container.append(table)
+const playerTurn = document.querySelector('.player-turn')
+const clickSpot = document.querySelectorAll('.spot')
 
 //array method for switching players I got from the tic tac toe hw
 const playerOne = [];
 const playerTwo = [];
 
+let player = 1;
+playerTurn.textContent = `Player ${player}'s Turn! You are red!`
 // click method was also code i wrote in the tic tac toe hw
 const click = (ev) => {
-        if ((ev.currentTarget.classList.contains("red")) || (ev.currentTarget.classList.contains("black"))) {
-            return;
-        } else if(playerOne.length === playerTwo.length) {
-            // ev.currentTarget.querySelector(`#${7}`).classList.add(".row1")
-            // ev.currentTarget.style.backgroundColor = "red"
-            playerOne.push(ev)
-            ev.currentTarget.classList.add("red")
-            console.log(ev.currentTarget)
-           
-        } else if(playerOne.length > playerTwo.length) {
-            // ev.currentTarget.querySelector(`#${+ 7}`).classList.add(".row1")
-            // ev.currentTarget.style.backgroundColor = "black"
-            playerTwo.push(ev)
-            ev.currentTarget.classList.add("black")
-            console.log(ev.currentTarget)
-        }
+    const columnList = ev.currentTarget.classList[1]
+    const rowList = ev.currentTarget.classList[2]
 
-     else {
-        alert("Cant go there!")
+    const columnValue = parseInt(columnList[columnList.length - 1]);
+    const rowValue = parseInt(rowList[rowList.length - 1]);
+
+    console.log(columnValue)
+    console.log(rowValue)
+
+    for (let i = 5; i >=0; i--) {
+        let rowValue = i;
+        if (rowValue.style.backgroundColor === "beige"){
+            // put a peice in and push to gameboard
+        }
+    
     }
+
+    //     if ((ev.currentTarget.classList.contains("red")) || (ev.currentTarget.classList.contains("black"))) {
+    //         return;
+    //     } else if(playerOne.length === playerTwo.length) {
+    //         let player = 2;
+    //         playerTurn.textContent = `Player ${player}'s Turn!`
+    
+    //         playerOne.push(ev)
+    //         ev.currentTarget.classList.add("red")
+    //         console.log(ev.currentTarget)
+           
+    //     } else if(playerOne.length > playerTwo.length) {
+    //         let player = 1;
+    //         playerTurn.textContent = `Player ${player}'s Turn!`
+           
+    //         playerTwo.push(ev)
+    //         ev.currentTarget.classList.add("black")
+    //         console.log(ev.currentTarget)
+    //     }
+
+    //  else {
+    //     alert("Cant go there!")
+    // }
     
 }
+/*
+code comment block
+[X]get column and row of clicked position
+     - check gameboard to see if bottom row has a value []
+        -check row 5 (bottom) to row 0 (top)
+     - if it does check next row, if not add piece []
+     - repeat two steps []
+[]when a user clicks on the column chip goes to the bottom
+[]loop through the column and row and see if they have any value
+[]if theres a value keep going
+[]there is no value put a piece in
+[]figure out if that piece leads to a win
+
+*/
+
 
 
 
@@ -48,19 +86,5 @@ const gameFunction = (ev) => {
     }
 }
 
-const clickSpot = document.querySelectorAll('.spot')
-clickSpot.forEach((element) => element.addEventListener('click',click))
 
-// (ev.currentTarget.querySelector(`#(id ${+ 7})`).style.backgroundColor === "beige")
-// && (ev.currentTarget.querySelector('.upper-row'))
-// (ev.currentTarget.querySelectorAll('.upper-row'))
-// && (ev.currentTarget.querySelector(`#(id ${> 0})`))
-// else if(redPlayer.length === blackPlayer.length) {
-//     // ev.currentTarget.classList.add(".row1")
-//     ev.currentTarget.style.backgroundColor = "red"
-//     redPlayer.push(ev)
-   
-// } else if(redPlayer.length > blackPlayer.length) {
-//     // ev.currentTarget.classList.add(".row1")
-//     ev.currentTarget.style.backgroundColor = "black"
-//     blackPlayer.push(ev)
+clickSpot.forEach((element) => element.addEventListener('click',click))
