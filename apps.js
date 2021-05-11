@@ -18,38 +18,55 @@ const click = (ev) => {
     const columnValue = parseInt(columnList[columnList.length - 1]);
     const rowValue = parseInt(rowList[rowList.length - 1]);
 
-    console.log(columnValue)
-    console.log(rowValue)
+    const redChip = document.querySelector('.red')
+    const blackChip = document.querySelector('.black')
+
 
     for (let i = 5; i >=0; i--) {
-        let rowValue = i;
-        if (rowValue.style.backgroundColor === "beige"){
-            // put a peice in and push to gameboard
+       
+        if ((ev.currentTarget.classList.contains("red")) || (ev.currentTarget.classList.contains("black"))) {
+            return;
+        } else if ((gameBoard[i][columnValue] === "") && (playerOne.length === playerTwo.length)){
+
+            let player = 2;
+            playerTurn.textContent = `Player ${player}'s Turn!`
+    
+            playerOne.push(ev)
+            ev.currentTarget.classList.add("red")
+            gameBoard[i][columnValue] = `1`
+            
+            console.log(gameBoard)
+            return
+        } else if (((gameBoard[i][columnValue] === "") && (playerOne.length > playerTwo.length))) {
+            
+            let player = 1;
+            playerTurn.textContent = `Player ${player}'s Turn!`
+               
+            playerTwo.push(ev)
+            ev.currentTarget.classList.add("black")
+
+            gameBoard[i][columnValue] = `2`
+            console.log(gameBoard)
         }
-    
+        
     }
-
-    //     if ((ev.currentTarget.classList.contains("red")) || (ev.currentTarget.classList.contains("black"))) {
-    //         return;
-    //     } else if(playerOne.length === playerTwo.length) {
-    //         let player = 2;
-    //         playerTurn.textContent = `Player ${player}'s Turn!`
     
-    //         playerOne.push(ev)
-    //         ev.currentTarget.classList.add("red")
-    //         console.log(ev.currentTarget)
-           
-    //     } else if(playerOne.length > playerTwo.length) {
-    //         let player = 1;
-    //         playerTurn.textContent = `Player ${player}'s Turn!`
-           
-    //         playerTwo.push(ev)
-    //         ev.currentTarget.classList.add("black")
-    //         console.log(ev.currentTarget)
-    //     }
 
-    //  else {
-    //     alert("Cant go there!")
+    // if ((ev.currentTarget.classList.contains("red")) || (ev.currentTarget.classList.contains("black"))) {
+    //     return;
+    // } else if(playerOne.length === playerTwo.length) {
+    //     let player = 2;
+    //     playerTurn.textContent = `Player ${player}'s Turn!`
+    
+    //     playerOne.push(ev)
+    //     ev.currentTarget.classList.add("red")
+           
+    // } else if(playerOne.length > playerTwo.length) {
+    //     let player = 1;
+    //     playerTurn.textContent = `Player ${player}'s Turn!`
+           
+    //     playerTwo.push(ev)
+    //     ev.currentTarget.classList.add("black")
     // }
     
 }
