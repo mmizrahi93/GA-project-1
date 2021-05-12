@@ -3,13 +3,16 @@ const table = document.querySelector('table')
 container.append(table)
 const playerTurn = document.querySelector('.player-turn')
 const clickSpot = document.querySelectorAll('.spot')
+const winner = document.querySelector('.winner')
+const reset = document.querySelector('.reset')
+let champ = false;
 
 //array method for switching players I got from the tic tac toe hw
-const playerOne = [];
-const playerTwo = [];
+let playerOne = [];
+let playerTwo = [];
 
-let player = 1;
-playerTurn.textContent = `Player ${player}'s Turn! You are red!`
+let player = 0;
+playerTurn.textContent = `Player 1's Turn! You are red!`
 // click method was also code i wrote in the tic tac toe hw
 const click = (ev) => {
     // getting column and row values 
@@ -18,17 +21,20 @@ const click = (ev) => {
     const columnValue = parseInt(columnList[columnList.length - 1]);
     const rowValue = parseInt(rowList[rowList.length - 1]);
 
-
+    if(champ) {
+        return
+    } else {
+    
     for (let i = 5; i >=0; i--) {
        
         if ((ev.currentTarget.classList.contains("red")) || (ev.currentTarget.classList.contains("black"))) {
             return;
         } else if ((gameBoard[i][columnValue] === "") && (playerOne.length === playerTwo.length)){
             // letting players know whos turn it is
-            let player = 2;
-            playerTurn.textContent = `Player ${player}'s Turn!`
+            let player = 1;
+            playerTurn.textContent = `Player 2's Turn!`
             // switching between players
-            playerOne.push(ev)
+            
             ev.currentTarget.classList.add("red")
             // clicking on a column and getting it into gameBoard  
             gameBoard[i][columnValue] = `1`
@@ -36,23 +42,22 @@ const click = (ev) => {
             const boardLocation = columnValue.toString() + i.toString()
             const redChip = document.getElementById(boardLocation)
             redChip.classList.add('red')
+            playerOne.push(boardLocation)
             // removing color class on clicked spot
             if (ev.currentTarget.id === boardLocation) {
                 // dont remove class on current clicked spot
             } else {
             ev.currentTarget.classList.remove('red')
             }
-            
-            
-            console.log(gameBoard)
+            winningFunction();
             return
 
         } else if ((gameBoard[i][columnValue] === "") && (playerOne.length > playerTwo.length)) {
             // letting players know whos turn it is
-            let player = 1;
-            playerTurn.textContent = `Player ${player}'s Turn!`
+            let player = 2;
+            playerTurn.textContent = `Player 1's Turn!`
             // switching between players   
-            playerTwo.push(ev)
+            
             ev.currentTarget.classList.add("black")
             // clicking on a column and pushing it into gameBoard[]
             gameBoard[i][columnValue] = `2`
@@ -60,20 +65,25 @@ const click = (ev) => {
             const boardLocation = columnValue.toString() + i.toString()
             const blackChip = document.getElementById(boardLocation)
             blackChip.classList.add("black")
+            playerTwo.push(boardLocation)
             // removing color class on clicked spot
             if (ev.currentTarget.id === boardLocation) {
                 // dont remove class on current clicked spot
             } else {
             ev.currentTarget.classList.remove('black')
             }
-            
-            console.log(gameBoard)
+            winningFunction();
+        
             return
         }
         
     }
+}
     
 }
+
+
+
 /*
 code comment block
 [X]get column and row of clicked position
@@ -92,7 +102,7 @@ code comment block
 
 
 
-const gameBoard = [
+let gameBoard = [
     ["", "", "", "", "", "", ""],
     ["", "", "", "", "", "", ""],
     ["", "", "", "", "", "", ""],
@@ -102,36 +112,67 @@ const gameBoard = [
 ]
 // https://dev.to/fakorededamilola/building-a-connect-four-game-with-javascript-1f45
 let winningArray = [ 
-    [0, 1, 2, 3], [41, 40, 39, 38],[7, 8, 9, 10], 
-    [34, 33, 32, 31], [14, 15, 16, 17], [27, 26, 25, 24], 
-    [21, 22, 23, 24], [20, 19, 18, 17], [28, 29, 30, 31], 
-    [13, 12, 11, 10], [35, 36, 37, 38], [6, 5, 4, 3], 
-    [0, 7, 14, 21], [41, 34, 27, 20], [1, 8, 15, 22], 
-    [40, 33, 26, 19], [2, 9, 16, 23], [39, 32, 25, 18], 
-    [3, 10, 17, 24], [38, 31, 24, 17], [4, 11, 18, 25], 
-    [37, 30, 23, 16], [5, 12, 19, 26], [36, 29, 22, 15], 
-    [6, 13, 20, 27], [35, 28, 21, 14], [0, 8, 16, 24], 
-    [41, 33, 25, 17], [7, 15, 23, 31], [34, 26, 18, 10], 
-    [14, 22, 30, 38], [27, 19, 11, 3], [35, 29, 23, 17], 
-    [6, 12, 18, 24], [28, 22, 16, 10], [13, 19, 25, 31], 
-    [21, 15, 9, 3], [20, 26, 32, 38], [36, 30, 24, 18], 
-    [5, 11, 17, 23], [37, 31, 25, 19], [4, 10, 16, 22], 
-    [2, 10, 18, 26], [39, 31, 23, 15], [1, 9, 17, 25], 
-    [40, 32, 24, 16], [9, 7, 25, 33], [8, 16, 24, 32], 
-    [11, 7, 23, 29], [12, 18, 24, 30], [1, 2, 3, 4], 
-    [5, 4, 3, 2], [8, 9, 10, 11], [12, 11, 10, 9],
-    [15, 16, 17, 18], [19, 18, 17, 16], [22, 23, 24, 25], 
-    [26, 25, 24, 23], [29, 30, 31, 32], [33, 32, 31, 30], 
-    [36, 37, 38, 39], [40, 39, 38, 37], [7, 14, 21, 28], 
-    [8, 15, 22, 29], [9, 16, 23, 30], [10, 17, 24, 31], 
-    [11, 18, 25, 32], [12, 19, 26, 33], [13, 20, 27, 34] 
+    [00, 10, 20, 30], [65, 55, 45, 35],[01, 11, 21, 31], 
+    [64, 54, 44, 34], [02, 12, 22, 32], [63, 53, 43, 33], 
+    [03, 13, 23, 24], [62, 52, 42, 32], [04, 14, 24, 34], 
+    [61, 51, 41, 31], [05, 15, 25, 35], [60, 50, 40, 30], 
+    [00, 01, 02, 03], [65, 64, 63, 62], [10, 11, 12, 13], 
+    [55, 54, 53, 52], [20, 21, 22, 23], [45, 44, 43, 42], 
+    [30, 31, 44, 33], [35, 34, 33, 32], [40, 41, 42, 43], 
+    [25, 24, 23, 22], [50, 51, 52, 53], [15, 14, 13, 12], 
+    [60, 61, 62, 63], [05, 04, 03, 02], [00, 11, 22, 33], 
+    [65, 54, 43, 32], [01, 12, 23, 34], [64, 53, 42, 31], 
+    [02, 13, 24, 35], [63, 52, 41, 30], [05, 14, 23, 32], 
+    [60, 51, 42, 33], [04, 13, 22, 31], [61, 52, 43, 34],
+    [03, 12, 21, 30], [62, 53, 44, 35], [15, 24, 33, 42],
+    [50, 41, 32, 23], [25, 34, 43, 52], [40, 31, 22, 13],
+    [20, 31, 42, 53], [45, 34, 23, 12], [10, 21, 32, 43],
+    [55, 44, 33, 22], [21, 01, 43, 54], [11, 22, 33, 44],
+    [41, 01, 23, 14], [51, 42, 33, 24], [10, 20, 30, 40],
+    [50, 40, 30, 20], [11, 21, 31, 41], [51, 41, 31, 21],
+    [12, 22, 32, 42], [52, 42, 32, 22], [13, 23, 33, 43],
+    [53, 43, 33, 23], [14, 24, 34, 44], [54, 44, 34, 24],
+    [15, 25, 35, 45], [55, 45, 35, 25], [01, 02, 03, 04],
+    [11, 12, 13, 14], [21, 22, 23, 24], [31, 32, 33, 34],
+    [41, 42, 43, 44], [51, 52, 53, 54], [61, 62, 63, 64] 
     ];
 
-const gameFunction = (ev) => {
-    if(gameBoard[i][n].length !== 0) {
-
+const winningFunction = () => {
+    for (let i = 0; i < winningArray.length; i++){
+        if(winningArray[i].every(space => playerOne.includes(space.toString()))) {
+            winner.textContent = "Player One is the Winner!";
+            playerTurn.remove()
+            champ = true;
+        } else if(winningArray[i].every(space => playerTwo.includes(space.toString()))){
+            winner.textContent = "Player Two is the Winner!";
+            playerTurn.remove()
+            champ = true;
+        }
+    }
+    for (let n = 0; n < gameBoard.length; n++) {
+        if((playerOne.length > 0) && gameBoard[n].every(space => space !== "")) {
+            winner.textContent = "It's a tie!"
+        }
     }
 }
 
+const startOver = () => {
+    gameBoard = [
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""]
+    ]
+    clickSpot.forEach((element) => element.classList.remove('red'))
+    clickSpot.forEach((element) => element.classList.remove('black'))
+    playerOne = [];
+    playerTwo = [];
+
+    player = 0;
+    playerTurn.textContent = `Player 1's Turn! You are red!`
+}
 
 clickSpot.forEach((element) => element.addEventListener('click',click))
+reset.addEventListener('click', startOver)
