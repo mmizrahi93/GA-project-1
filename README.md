@@ -7,6 +7,9 @@ PLAYING THE GAME
 
 When reaching the site the players see the game board and are informed that player one is the color red and to click on the board to begin.  Once player one makes their turn a text comes up stating that it is now player two's turn.  After each players click a text comes up telling them who's turn it is until somoeone wins.  When a player wins they are prompted with a winning message and are then asked to press the reset button to start the game over. If there is a tie then a message comes up stating its a tie and to press the restart button to try again. 
 
+CLICK ON LINK TO PLAY!
+file:///Users/matanmizrahi/dev/mmizrahi93.github.io/index.html
+
 TECHNOLOGIES USED
 
 - Javascript
