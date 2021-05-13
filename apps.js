@@ -33,8 +33,7 @@ const click = (ev) => {
             // letting players know whos turn it is
             let player = 1;
             playerTurn.textContent = `Player 2's Turn!`
-            // switching between players
-            
+            // adding color 
             ev.currentTarget.classList.add("red")
             // clicking on a column and getting it into gameBoard  
             gameBoard[i][columnValue] = `1`
@@ -49,6 +48,7 @@ const click = (ev) => {
             } else {
             ev.currentTarget.classList.remove('red')
             }
+            console.log(gameBoard)
             winningFunction();
             return
 
@@ -56,10 +56,9 @@ const click = (ev) => {
             // letting players know whos turn it is
             let player = 2;
             playerTurn.textContent = `Player 1's Turn!`
-            // switching between players   
-            
+            // adding color    
             ev.currentTarget.classList.add("black")
-            // clicking on a column and pushing it into gameBoard[]
+            // clicking on a column and pushing it into gameBoard
             gameBoard[i][columnValue] = `2`
             // pushing color down to game board
             const boardLocation = columnValue.toString() + i.toString()
@@ -73,7 +72,7 @@ const click = (ev) => {
             ev.currentTarget.classList.remove('black')
             }
             winningFunction();
-        
+            console.log(gameBoard)
             return
         }
         
@@ -81,25 +80,6 @@ const click = (ev) => {
 }
     
 }
-
-
-
-/*
-code comment block
-[X]get column and row of clicked position
-     - check gameboard to see if bottom row has a value []
-        -check row 5 (bottom) to row 0 (top)
-     - if it does check next row, if not add piece []
-     - repeat two steps []
-[]when a user clicks on the column chip goes to the bottom
-[]loop through the column and row and see if they have any value
-[]if theres a value keep going
-[]there is no value put a piece in
-[]figure out if that piece leads to a win
-
-*/
-
-
 
 
 let gameBoard = [
@@ -137,15 +117,25 @@ let winningArray = [
     [41, 42, 43, 44], [51, 52, 53, 54], [61, 62, 63, 64] 
     ];
 
+
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every
 const winningFunction = () => {
     for (let i = 0; i < winningArray.length; i++){
+        // goes through playerOne array and checks if its in winningArray
+        // winningArray[i].every(space => {
+            
+        //     console.log(playerOne.includes(space.toString()))
+        // })
         if(winningArray[i].every(space => playerOne.includes(space.toString()))) {
             winner.textContent = "Player One is the Winner!";
-            playerTurn.remove()
+            playerTurn.textContent = `Player 1's Turn! You are red!`
+            console.log(playerOne)
             champ = true;
+        // goes through playerTwo array and checks if its in winningArray
         } else if(winningArray[i].every(space => playerTwo.includes(space.toString()))){
             winner.textContent = "Player Two is the Winner!";
-            playerTurn.remove()
+            playerTurn.textContent = `Player 1's Turn! You are red!`
+            console.log(playerTwo)
             champ = true;
         }
     }
@@ -154,6 +144,7 @@ const winningFunction = () => {
             winner.textContent = "It's a tie!"
         }
     }
+    
 }
 
 const startOver = () => {
@@ -172,6 +163,8 @@ const startOver = () => {
 
     player = 0;
     playerTurn.textContent = `Player 1's Turn! You are red!`
+    champ = false
+    winner.textContent = ''
 }
 
 clickSpot.forEach((element) => element.addEventListener('click',click))
