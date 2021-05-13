@@ -127,6 +127,7 @@ const winningFunction = () => {
         } else if(winningArray[i].every(space => playerTwo.includes(space))){
             winner.textContent = "Player Two is the Winner! Click reset to start over!";
             champ = true;
+        // if top row is full then the game ends in a tie
         } else if(gameBoard[0].every(space => space !== "")) {
             
             winner.textContent = "It's a tie! Try again and click reset to start over!"
