@@ -12,7 +12,7 @@ let playerOne = [];
 let playerTwo = [];
 
 let player = 0;
-playerTurn.textContent = `Player 1's Turn! You are red!`
+playerTurn.textContent = `Player 1's Turn! You are red! Click on a spot to begin!`
 // click method was also code i wrote in the tic tac toe hw
 const click = (ev) => {
     // getting column and row values 
@@ -127,21 +127,21 @@ const winningFunction = () => {
         //     console.log(playerOne.includes(space.toString()))
         // })
         if(winningArray[i].every(space => playerOne.includes(space.toString()))) {
-            winner.textContent = "Player One is the Winner!";
-            playerTurn.textContent = `Player 1's Turn! You are red!`
+            winner.textContent = "Player One is the Winner! Click reset to start over!";
+            // playerTurn.textContent = `Player 1's Turn! You are red! Click on a spot to begin!`
             console.log(playerOne)
             champ = true;
         // goes through playerTwo array and checks if its in winningArray
         } else if(winningArray[i].every(space => playerTwo.includes(space.toString()))){
-            winner.textContent = "Player Two is the Winner!";
-            playerTurn.textContent = `Player 1's Turn! You are red!`
+            winner.textContent = "Player Two is the Winner! Click reset to start over!";
+            // playerTurn.textContent = `Player 1's Turn! You are red! Click on a spot to begin!`
             console.log(playerTwo)
             champ = true;
         }
     }
     for (let n = 0; n < gameBoard.length; n++) {
         if((playerOne.length > 0) && gameBoard[n].every(space => space !== "")) {
-            winner.textContent = "It's a tie!"
+            winner.textContent = "It's a tie! Try again and click reset to start over!"
         }
     }
     
@@ -162,7 +162,7 @@ const startOver = () => {
     playerTwo = [];
 
     player = 0;
-    playerTurn.textContent = `Player 1's Turn! You are red!`
+    playerTurn.textContent = `Player 1's Turn! You are red! Click on a spot to begin!`
     champ = false
     winner.textContent = ''
 }
