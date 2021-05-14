@@ -134,7 +134,7 @@ const winningFunction = () => {
         }
     }  
 }
-
+// reset button function
 const startOver = () => {
     gameBoard = [
         ["", "", "", "", "", "", ""],
@@ -154,6 +154,6 @@ const startOver = () => {
     champ = false
     winner.textContent = ''
 }
-
+// event listners
 clickSpot.forEach((element) => element.addEventListener('click',click))
 reset.addEventListener('click', startOver)
